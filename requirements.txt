@@ -1,0 +1,62 @@
+# --- Core Web Framework (FastAPI & Uvicorn) ---
+# Handles routing, HTTP server capabilities, and core web request infrastructure
+fastapi==0.162.0
+starlette==1.10.0
+uvicorn==0.54.0
+h11==0.16.0
+anyio==4.16.0
+click==8.5.0
+python-multipart==0.0.33
+
+# --- Data Validation & Settings Management (Pydantic) ---
+# Parses request bodies, validates schemas, and loads environment variables
+pydantic==2.14.2
+pydantic_core==2.50.2
+pydantic-settings==2.16.2
+annotated-types==0.8.0
+annotated-doc==0.0.5
+email-validator==2.3.0
+dnspython==2.9.1
+python-dotenv==1.2.4
+
+# --- Database & ORM (SQLAlchemy & PostgreSQL Drivers) ---
+# Manages database models and migrations, connection pooling, and PostgreSQL communication
+SQLAlchemy==2.1.6
+alembic==1.20.1
+psycopg==3.3.6
+psycopg-binary==3.3.6
+psycopg2==2.9.13
+
+# --- Security, Hashing & JWT Authentication ---
+# Handles token generation, cryptography, and secure password hashing
+python-jose==3.3.0
+bcrypt==4.2.0
+passlib==1.7.4
+cryptography==50.0.2
+cffi==2.1.1
+pycparser==3.12
+ecdsa==0.19.2
+rsa==4.9.1
+pyasn1==0.6.5
+
+# --- Networking & HTTP Clients ---
+# Used for making external API requests, SSL certificate verification, and URL handling
+requests==2.34.2
+urllib3==2.8.0
+certifi==2026.10.23
+charset-normalizer==3.5.2
+idna==3.20
+
+# --- Development Tools & Utilities ---
+# Development utilities, metadata parsing, and dependency scanning helpers
+pipreqs==0.4.13
+yarg==0.1.10
+docopt==0.6.2
+opentelemetry-api==1.45.2
+
+# --- Python Compatibility & Typing Extensions ---
+# Provides backports for newer Python typing features and runtime type inspection
+typing_extensions==4.16.0
+typing-inspection==0.4.4
+six==1.17.0
+tzdata==2026.6
