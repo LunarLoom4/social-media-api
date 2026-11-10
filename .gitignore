@@ -2,10 +2,14 @@
 .venv
 __pycache__
 
+# Certificate files
 certs/
+
+# NGINX runtime files
+nginx/logs/*
+!nginx/logs/.gitkeep
+nginx/temp/
 
 *.pdf
 
 *.png
-*.jpeg
-*.jpg
