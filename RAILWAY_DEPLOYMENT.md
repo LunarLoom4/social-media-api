@@ -12,7 +12,7 @@ Deploy from the repository root, where `requirements.txt`, `app/`, `alembic/`, `
 {
   "$schema": "https://schema.railpack.com",
   "deploy": {
-    "startCommand": "python -m uvicorn app.main_v2:app --host 0.0.0.0 --port $PORT"
+    "startCommand": "python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
   }
 }
 ```
@@ -91,4 +91,4 @@ To get a public URL, select **`social-media-api` → Settings → Networking →
 
 Keep Postgres private; the API connects to it over Railway's private network.
 
-Before using a browser-based frontend, replace the wildcard CORS origin in `app/main_v2.py` with the frontend's actual origin.
+Before using a browser-based frontend, replace the wildcard CORS origin in `app/main.py` with the frontend's actual origin.
