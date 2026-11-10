@@ -11,6 +11,7 @@ A backend REST API built with FastAPI and PostgreSQL. It provides user authentic
 - PostgreSQL database integration
 - Database migrations using Alembic
 - Interactive API documentation with Swagger UI
+- Two local development options: Uvicorn directly, or Uvicorn behind NGINX
 
 ## Tech Stack
 
@@ -23,6 +24,7 @@ A backend REST API built with FastAPI and PostgreSQL. It provides user authentic
 | Alembic | Database migrations |
 | OAuth2 + JWT | Authentication |
 | Uvicorn | ASGI server |
+| NGINX | Optional local reverse proxy for HTTPS development |
 
 ## Local Setup
 
@@ -156,9 +158,11 @@ This applies the existing Alembic migrations and creates the required database t
 
 ### 7. Start the application
 
-The development server can be started using the included Python script.
+There are two ways to run the API locally. Use Uvicorn directly for a simple setup, or put NGINX in front of Uvicorn for local HTTPS development.
 
-**HTTP:**
+#### Option A: Run Uvicorn directly
+
+This starts Uvicorn on `127.0.0.1:8000`. Use HTTP:
 
 ```bash
 python scripts/run_server.py http
@@ -168,41 +172,61 @@ The API will be available at:
 
 http://127.0.0.1:8000
 
-**HTTPS (optional):**
+To use HTTPS directly with Uvicorn, first install [mkcert](https://github.com/FiloSottile/mkcert) and initialize its local certificate authority:
 
-Local HTTPS can be enabled using [mkcert](https://github.com/FiloSottile/mkcert).
-
-Install mkcert and initialize its local certificate authority:
+From the project root, create the localhost certificates:
 
 ```bash
 mkcert -install
-```
-
-From the project root, generate the localhost certificates:
-
-```bash
 mkdir certs
 mkcert -key-file certs/localhost-key.pem -cert-file certs/localhost.pem localhost 127.0.0.1 ::1
 ```
 
-Start the server using HTTPS:
+Then start Uvicorn with HTTPS:
 
 ```bash
 python scripts/run_server.py https
 ```
 
-The API will now be available at:
+The API will be available at:
 
 https://localhost:8000
 
+#### Option B: Run behind NGINX
+
+This option starts Uvicorn on `127.0.0.1:8000` using HTTP, then starts NGINX in front of it. NGINX handles the local HTTP-to-HTTPS redirect, TCP Connection, followed by TLS Handshake (presents its certificates to the Browser), and reverse proxying to Uvicorn. The API is available at `https://localhost`, without a port in the URL.
+
+This setup also needs NGINX installed and the localhost certificates generated with mkcert as described above. Make the NGINX executable available on your `PATH`, or pass its location to the script with `--nginx-executable`. For example:
+
+```bash
+python scripts/run_local.py
+```
+
+Or, if NGINX isn't on your `PATH`:
+
+```bash
+python scripts/run_local.py --nginx-executable "C:\nginx\nginx.exe"
+```
+
+The script starts and monitors both servers, and stops them when you press `CTRL+C`. NGINX listens on ports 80 and 443, so make sure those ports are available and that your system allows the script to bind to them.
+
+Open `http://localhost` to be redirected to HTTPS, or go straight to:
+
+- [API](https://localhost)
+- [Swagger UI](https://localhost/docs)
+- [ReDoc](https://localhost/redoc)
+
+The current NGINX configuration proxies requests to a single Uvicorn instance. It does not currently configure rate limiting or load balancing.
+
 ## API Documentation
 
-Once the server is running, the interactive API documentation is available at:
+Once a server is running, the interactive API documentation is available at:
 
-- [Swagger UI](http://127.0.0.1:8000/docs) (HTTP)
-- [ReDoc](http://127.0.0.1:8000/redoc) (HTTP)
+- Direct Uvicorn over HTTP: [Swagger UI](http://127.0.0.1:8000/docs) · [ReDoc](http://127.0.0.1:8000/redoc)
+- Direct Uvicorn over HTTPS: [Swagger UI](https://localhost:8000/docs) · [ReDoc](https://localhost:8000/redoc)
+- NGINX reverse proxy: [Swagger UI](https://localhost/docs) · [ReDoc](https://localhost/redoc)
 
-When using HTTPS, replace `http://127.0.0.1:8000` with `https://localhost:8000`.
+The HTTPS links use the local certificates generated with mkcert.
 
 ## Deployment
 
