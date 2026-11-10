@@ -10,6 +10,10 @@ nginx/logs/*
 !nginx/logs/.gitkeep
 nginx/temp/
 
-*.pdf
+# Postman local workspace resources
+postman/
+.postman/
 
+# Local PDF and image files
+*.pdf
 *.png
