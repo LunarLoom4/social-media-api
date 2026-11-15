@@ -1,8 +1,11 @@
 from sqlalchemy.engine import URL, make_url
+
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+
 from .config import settings
+
 
 # SQLALCHEMY_DATABASE_URL = '<drivername>://<username>:<password>@<ip-address>/hostname>/<database_name>'
 
@@ -50,7 +53,7 @@ else:
 # Used to manage connections to the database and execute SQL statements
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
-# Creating a sessionmaker object that will be used to create database sessions
+# Creating a 'sessionmaker' object that will be used to create database sessions
 SessionLocal = sessionmaker(autocommit = False, autoflush = False, bind = engine)
 
 # Dependency function to get a database session.

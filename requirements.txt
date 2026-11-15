@@ -23,6 +23,8 @@ python-dotenv==1.2.4
 # Manages database models and migrations, connection pooling, and PostgreSQL communication
 SQLAlchemy==2.1.6
 alembic==1.20.1
+Mako==1.4.3
+MarkupSafe==3.0.4
 psycopg==3.3.6
 psycopg-binary==3.3.6
 psycopg2==2.9.13
@@ -30,7 +32,8 @@ psycopg2==2.9.13
 # --- Security, Hashing & JWT Authentication ---
 # Handles token generation, cryptography, and secure password hashing
 python-jose==3.3.0
-bcrypt==4.2.0
+bcrypt==5.0.0
+python-bcrypt==0.3.2
 passlib==1.7.4
 cryptography==50.0.2
 cffi==2.1.1
@@ -40,18 +43,24 @@ rsa==4.9.1
 pyasn1==0.6.5
 
 # --- Networking & HTTP Clients ---
-# Used for making external API requests, SSL certificate verification, and URL handling
+# Used for making external API requests, SSL certificate verification, URL handling, and WebSocket communication
 requests==2.34.2
 urllib3==2.8.0
 certifi==2026.10.23
 charset-normalizer==3.5.2
 idna==3.20
+websockets==17.4
+
+# --- Caching & Data Storage ---
+# Provides Redis client functionality for communicating with Redis data stores
+redis==8.1.0
 
 # --- Development Tools & Utilities ---
-# Development utilities, metadata parsing, and dependency scanning helpers
+# Development utilities, repository maintenance, metadata parsing, and dependency scanning helpers
 pipreqs==0.4.13
 yarg==0.1.10
 docopt==0.6.2
+git-filter-repo==2.47.0
 opentelemetry-api==1.45.2
 
 # --- Python Compatibility & Typing Extensions ---

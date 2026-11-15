@@ -43,7 +43,8 @@ app = FastAPI(title = "FastAPI Backend Project",
 # --< Change to 'origins = ["https://www.google.com"]' to allow only 'google.com' webpages to make requests to this API.
 origins = ["*"]
 
-# Adding CORS Middleware to the FastAPI instance to allow sharing of resources between different origins (domains).
+# Add CORS Middleware to the FastAPI instance to allow sharing of resources between different origins.
+# An ORIGIN is defined as: Protocol + Domain + Port [<Protocol>://<domain.com/localhost>::<Port>]
 app.add_middleware(
     CORSMiddleware,
     allow_origins = origins,    # Allow all origins (webpages from any domain) to access the resources of this FastAPI application.
