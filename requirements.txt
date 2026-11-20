@@ -33,7 +33,6 @@ psycopg2==2.9.13
 # Handles token generation, cryptography, and secure password hashing
 python-jose==3.3.0
 bcrypt==5.0.0
-python-bcrypt==0.3.2
 passlib==1.7.4
 cryptography==50.0.2
 cffi==2.1.1

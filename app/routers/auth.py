@@ -13,8 +13,8 @@ router = APIRouter(tags = ["Authentication"])
 # Dependency class to collect the 'username' and 'password' as form data.
 @router.post("/login/", response_model = schemas.Token)
 def login(
-    user_cred: OAuth2PasswordRequestForm = Depends(),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    user_cred: OAuth2PasswordRequestForm = Depends()
 ):
     user = db.query(models.User).filter(models.User.email == user_cred.username).first()
 

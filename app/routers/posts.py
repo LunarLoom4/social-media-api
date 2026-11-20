@@ -16,11 +16,11 @@ access_all_posts = True
 # Defining an endpoint to get all 'posts'
 @router.get("/", response_model = List[schemas.Resp_PostWithVotes])
 def get_posts(
-    db: Session = Depends(get_db),
-    current_user: models.User = Depends(oauth2.get_current_user),
     searchStr: str | None = None,
     limit: int = 10,
-    offset: int = 0
+    offset: int = 0,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     global access_all_posts
 

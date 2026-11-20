@@ -32,4 +32,5 @@ if args.mode == "https":
         "--ssl-keyfile", str(key),
     ])
 
-subprocess.run(command, cwd=PROJECT_ROOT)
+# Run the above 'command' from project's root directory.
+subprocess.run(command, cwd = PROJECT_ROOT)
